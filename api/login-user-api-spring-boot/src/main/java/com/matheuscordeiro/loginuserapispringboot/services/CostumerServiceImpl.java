@@ -51,7 +51,7 @@ public class CostumerServiceImpl implements CostumerService {
     public Costumer updateCostumerOrThrow(Costumer costumer) {
         try {
           return updateCostumer(costumer);
-        } catch (BusinessException e) {
+        } catch (BusinessException | ObjectNotFoundException e) {
             throw new BusinessException("Ocorreu um erro inesperado ao atualizar o cliente na base de dados");
         }
     }
@@ -60,32 +60,34 @@ public class CostumerServiceImpl implements CostumerService {
     public void deleteCostumerByIdOrThrow(Long id) {
         try {
             deleteCostumerById(id);
-        } catch (BusinessException e) {
+        } catch (BusinessException | ObjectNotFoundException e) {
             throw new BusinessException("Ocorreu um erro inesperado ao deletar o cliente na base de dados");
         }
     }
 
     private Optional<Costumer> findByIdCostumer(Long id) {
-        return null;
+        return costumerRepository.findById(id);
     }
 
     private List<Costumer> findAllCostumer() {
-        return null;
+        return costumerRepository.findAll();
     }
 
     private Costumer saveCostumer(Costumer costumer) {
-        return null;
+        return costumerRepository.save(costumer);
     }
 
-    private Costumer updateCostumer(Costumer costumer) {
-        return null;
+    private Costumer updateCostumer(Costumer costumer) throws ObjectNotFoundException {
+        verifyIfExists(costumer.getId());
+        return costumerRepository.save(costumer);
     }
 
-    private void deleteCostumerById(Long id) {
-
+    private void deleteCostumerById(Long id) throws ObjectNotFoundException {
+        verifyIfExists(id);
+        costumerRepository.deleteById(id);
     }
 
-    private Costumer verifyIfExists(Long id) {
-        return null;
+    private Costumer verifyIfExists(Long id) throws ObjectNotFoundException {
+        return costumerRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(COSTUMER, id));
     }
 }
