@@ -1,18 +1,20 @@
 package com.matheuscordeiro.loginuserapispringboot.services.interfaces;
 
 import com.matheuscordeiro.loginuserapispringboot.entities.Costumer;
+import com.matheuscordeiro.loginuserapispringboot.exceptions.BusinessException;
+import com.matheuscordeiro.loginuserapispringboot.exceptions.ObjectNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface CostumerService {
-    Optional<Costumer> findByIdCostumer();
+    Optional<Costumer> findByIdCostumerOrThrow(Long id) throws ObjectNotFoundException;
 
-    List<Costumer> findAllCostumer();
+    List<Costumer> findAllCostumerOrThrow() throws ObjectNotFoundException;
 
-    Costumer saveCostumer();
+    Costumer saveCostumerOrThrow(Costumer costumer);
 
-    Costumer updateCostumer();
+    Costumer updateCostumerOrThrow(Costumer costumer);
 
-    void deleteCostumerById();
+    void deleteCostumerByIdOrThrow(Long id);
 }
