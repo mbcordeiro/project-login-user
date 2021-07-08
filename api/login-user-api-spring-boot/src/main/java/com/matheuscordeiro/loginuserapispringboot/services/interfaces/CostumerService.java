@@ -2,12 +2,13 @@ package com.matheuscordeiro.loginuserapispringboot.services.interfaces;
 
 import com.matheuscordeiro.loginuserapispringboot.entities.Costumer;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CostumerService {
-    Long findByIdCostumer();
+    Optional<Costumer> findByIdCostumer();
 
-    Optional findAllCostumer();
+    List<Costumer> findAllCostumer();
 
     Costumer saveCostumer();
 

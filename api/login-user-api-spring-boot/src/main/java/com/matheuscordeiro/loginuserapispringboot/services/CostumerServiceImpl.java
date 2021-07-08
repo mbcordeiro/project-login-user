@@ -4,18 +4,19 @@ import com.matheuscordeiro.loginuserapispringboot.entities.Costumer;
 import com.matheuscordeiro.loginuserapispringboot.services.interfaces.CostumerService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CostumerServiceImpl implements CostumerService {
     @Override
-    public Long findByIdCostumer() {
+    public Optional<Costumer> findByIdCostumer() {
         return null;
     }
 
     @Override
-    public Optional findAllCostumer() {
-        return Optional.empty();
+    public List<Costumer> findAllCostumer() {
+        return null;
     }
 
     @Override
