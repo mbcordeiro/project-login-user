@@ -3,6 +3,7 @@ package com.matheuscordeiro.loginuserapispringboot.services;
 import com.matheuscordeiro.loginuserapispringboot.entities.Costumer;
 import com.matheuscordeiro.loginuserapispringboot.exceptions.BusinessException;
 import com.matheuscordeiro.loginuserapispringboot.exceptions.ObjectNotFoundException;
+import com.matheuscordeiro.loginuserapispringboot.repositories.CostumerRepository;
 import com.matheuscordeiro.loginuserapispringboot.services.interfaces.CostumerService;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,12 @@ import java.util.Optional;
 @Service
 public class CostumerServiceImpl implements CostumerService {
     private static final String COSTUMER = "Costumer";
+
+    private CostumerRepository costumerRepository;
+
+    public CostumerServiceImpl(CostumerRepository costumerRepository) {
+        this.costumerRepository = costumerRepository;
+    }
 
     @Override
     public Optional<Costumer> findByIdCostumerOrThrow(Long id) throws ObjectNotFoundException {
