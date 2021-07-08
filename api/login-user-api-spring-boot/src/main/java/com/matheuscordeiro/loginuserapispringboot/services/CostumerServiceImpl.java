@@ -48,9 +48,9 @@ public class CostumerServiceImpl implements CostumerService {
     }
 
     @Override
-    public Costumer updateCostumerOrThrow(Costumer costumer) {
+    public Costumer updateCostumerOrThrow(Long id, Costumer costumer) {
         try {
-          return updateCostumer(costumer);
+          return updateCostumer(id, costumer);
         } catch (BusinessException | ObjectNotFoundException e) {
             throw new BusinessException("Ocorreu um erro inesperado ao atualizar o cliente na base de dados");
         }
@@ -77,9 +77,9 @@ public class CostumerServiceImpl implements CostumerService {
         return costumerRepository.save(costumer);
     }
 
-    private Costumer updateCostumer(Costumer costumer) throws ObjectNotFoundException {
-        verifyIfExists(costumer.getId());
-        return costumerRepository.save(costumer);
+    private Costumer updateCostumer(Long id, Costumer costumer) throws ObjectNotFoundException {
+        Costumer costumerValid =  validUpdateCostumer(verifyIfExists(id), costumer);
+        return costumerRepository.save(costumerValid);
     }
 
     private void deleteCostumerById(Long id) throws ObjectNotFoundException {
@@ -90,4 +90,12 @@ public class CostumerServiceImpl implements CostumerService {
     private Costumer verifyIfExists(Long id) throws ObjectNotFoundException {
         return costumerRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(COSTUMER, id));
     }
+
+    private Costumer validUpdateCostumer(Costumer costumerValid, Costumer costumer) {
+        costumer.setAddress(costumerValid.getAddress());
+        costumer.setPhone(costumerValid.getPhone());
+        costumer.setId(costumerValid.getId());
+        return costumer;
+    }
+
 }

@@ -33,13 +33,13 @@ public class CostumerController {
         return ResponseEntity.ok(costumerService.saveCostumerOrThrow(costumer));
     }
 
-    @PutMapping
-    public ResponseEntity<Void> updateCostumer(@RequestBody @Valid Costumer costumer) {
-        costumerService.updateCostumerOrThrow(costumer);
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateCostumer(@PathVariable Long id, @RequestBody @Valid Costumer costumer) {
+        costumerService.updateCostumerOrThrow(id, costumer);
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCostumerById(@PathVariable Long id) {
         costumerService.deleteCostumerByIdOrThrow(id);
         return ResponseEntity.noContent().build();

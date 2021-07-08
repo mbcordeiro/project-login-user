@@ -14,7 +14,7 @@ public interface CostumerService {
 
     Costumer saveCostumerOrThrow(Costumer costumer);
 
-    Costumer updateCostumerOrThrow(Costumer costumer);
+    Costumer updateCostumerOrThrow(Long id, Costumer costumer);
 
     void deleteCostumerByIdOrThrow(Long id);
 }
