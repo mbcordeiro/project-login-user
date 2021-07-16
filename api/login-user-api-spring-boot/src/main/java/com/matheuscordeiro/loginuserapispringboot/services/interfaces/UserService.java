@@ -8,4 +8,6 @@ public interface UserService {
     Optional<User> findUserByIdOrThrow(Long id);
 
     User findUserByEmailOrThrow(String email);
+
+    void signUpOrThrow(User user);
 }

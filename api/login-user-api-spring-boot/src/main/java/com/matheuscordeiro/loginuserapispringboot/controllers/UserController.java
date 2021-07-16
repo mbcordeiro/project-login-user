@@ -23,4 +23,9 @@ public class UserController {
     public ResponseEntity<User> findByEmail(@RequestParam String email) {
         return ResponseEntity.ok(userService.findUserByEmailOrThrow(email));
     }
+
+    @PostMapping("/login")
+    public void signUp(@RequestBody User user) {
+        userService.signUpOrThrow(user);
+    }
 }
